@@ -1,0 +1,69 @@
+<?php
+$comp_model = new SharedController;
+$page_element_id = "add-page-" . random_str();
+$current_page = $this->set_current_page_link();
+$csrf_token = Csrf::$token;
+$show_header = $this->show_header;
+$view_title = $this->view_title;
+$redirect_to = $this->redirect_to;
+?>
+<section class="page" id="<?php echo $page_element_id; ?>" data-page-type="add"  data-display-type="" data-page-url="<?php print_link($current_page); ?>">
+    <?php
+    if( $show_header == true ){
+    ?>
+    <div  class="bg-white p-1 mb-1">
+        <div class="container">
+            <div class="row ">
+                <div class="col ">
+                    <h4 class="record-title">Add New Setok Barang</h4>
+                </div>
+                <div class="col-md-4 comp-grid">
+                    <div class=""><div><?php
+                        //mysql_query('INSERT INTO table (ID, NAME,PRICE) VALUES '.implode(',', $sql));
+                        if(isset($_POST['operator'])){ ?>
+                        <script language="JavaScript">
+                            alert('Data Barang Berhasil Di Simpan!!');
+                            document.location='<?php print_link("data_barang"); ?>';
+                        </script>
+                        <?php 
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php
+}
+?>
+<div  class="">
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-12 comp-grid">
+                <div class=""><div>
+                    <script language="JavaScript">
+                        alert('Di Larang Akses!!');
+                        document.location='<?php print_link(""); ?>';
+                    </script>   
+                </div>
+            </div>
+            <?php $this :: display_page_errors(); ?>
+            <div  class="bg-light p-3 animated fadeIn page-content">
+                <form id="setok_barang-add-form" role="form" novalidate enctype="multipart/form-data" class="form page-form form-horizontal needs-validation" action="<?php print_link("setok_barang/add?csrf_token=$csrf_token") ?>" method="post">
+                    <div>
+                    </div>
+                    <div class="form-group form-submit-btn-holder text-center mt-3">
+                        <div class="form-ajax-status"></div>
+                        <button class="btn btn-primary" type="submit">
+                            Submit
+                            <i class="fa fa-send"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
